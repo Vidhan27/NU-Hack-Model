@@ -1,3 +1,5 @@
 Nirma[[:space:]]Models/*.h5 filter=lfs diff=lfs merge=lfs -text
 *.h5 filter=lfs diff=lfs merge=lfs -text
 Nirma[[:space:]]Models/*.h5 filter=lfs diff=lfs merge=lfs -text
+*.tflite filter=lfs diff=lfs merge=lfs -text
+Nirma[[:space:]]Models/TFLite/*.tflite filter=lfs diff=lfs merge=lfs -text

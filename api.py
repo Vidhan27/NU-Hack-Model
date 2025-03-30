@@ -5,18 +5,39 @@ import cv2
 import os
 from tensorflow.keras.preprocessing import image
 from io import BytesIO
+import os
+
+app = Flask(__name__)
+
+# # Load models
+# pneumonia_model = tf.keras.models.load_model(r"Nirma Models\pneumonia_classifier.h5")
+# skin_cancer_model = tf.keras.models.load_model(r"Nirma Models\skin-cancer-isic-9-classes_VGG19_V1_ph1_model.h5")
+# tumor_model = tf.keras.models.load_model(r"Nirma Models\tumor_classifier_model.h5")
 
 app = Flask(__name__)
 
 # ✅ Define paths to models (Lazy Loading)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_DIR = os.path.join(BASE_DIR, "Nirma Models")
+MODEL_DIR = os.path.join(BASE_DIR, "Nirma Models/TFLite")
 
 MODEL_PATHS = {
-    "pneumonia": os.path.join(MODEL_DIR, "pneumonia_classifier.h5"),
-    "skin_cancer": os.path.join(MODEL_DIR, "skin-cancer-isic-9-classes_VGG19_V1_ph1_model.h5"),
-    "tumor": os.path.join(MODEL_DIR, "tumor_classifier_model.h5"),
+    "pneumonia": os.path.join(MODEL_DIR, "pneumonia_classifier.tflite"),
+    "skin_cancer": os.path.join(MODEL_DIR, "skin-cancer-isic-9-classes_VGG19_V1_ph1_model.tflite"),
+    "tumor": os.path.join(MODEL_DIR, "tumor_classifier_model.tflite"),
 }
+
+# Function to load TFLite model
+class TFLiteModel:
+    def __init__(self, model_path):
+        self.interpreter = tf.lite.Interpreter(model_path=model_path)
+        self.interpreter.allocate_tensors()
+        self.input_details = self.interpreter.get_input_details()
+        self.output_details = self.interpreter.get_output_details()
+
+    def predict(self, input_data):
+        self.interpreter.set_tensor(self.input_details[0]['index'], input_data)
+        self.interpreter.invoke()
+        return self.interpreter.get_tensor(self.output_details[0]['index'])
 
 # ✅ Tumor class labels
 class_labels = {0: "HGG (High-Grade Glioma)", 1: "LGG (Low-Grade Glioma)"}
