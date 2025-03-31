@@ -1,24 +1,29 @@
 import React from 'react';
 import { AlertCircle, Check, Info, ArrowRight } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 
 const SkinDiseaseResult = () => {
   // Sample patient result data (would be passed as props in a real app)
   const diagnosis_Decode = {
-    0: "Actinic Keratosis",
-    1: "Pigmented Benign Keratosis",
-    2: "Melanoma",
-    3: "Vascular Lesion",
-    4: "Squamous Cell Carcinoma",
-    5: "Basal Cell Carcinoma",
-    6: "Seborrheic Keratosis",
-    7: "Dermatofibroma",
-    8: "Nevus"
+    1: "Actinic Keratosis",
+    2: "Pigmented Benign Keratosis",
+    3: "Melanoma",
+    4: "Vascular Lesion",
+    5: "Squamous Cell Carcinoma",
+    6: "Basal Cell Carcinoma",
+    7: "Seborrheic Keratosis",
+    8: "Dermatofibroma",
+    9: "Nevus"
   }
+  const { state } = useLocation();
+  
+  const { mlOutput } = state || {};
+  
   
   const patientResult = {
-    patientName: "John Doe",
+    patientName: "Varun Jethani",
     diagnosisDate: "March 30, 2025",
-    primaryDiagnosis: "Melanoma",
+    primaryDiagnosis: diagnosis_Decode[mlOutput],
     supportCount: 97,
     recommendedActions: [
       "Schedule an appointment with a dermatologist within 1 week",

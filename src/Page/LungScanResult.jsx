@@ -1,12 +1,18 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const LungScanResults = () => { //{ patientName, scanDate, hasPneumonia }
 
+  const { state } = useLocation();
+  
+  
+  const { mlOutput } = state || {};
+
     // Sample data for demonstration
     // In a real application, this data would be fetched from an API or database
-    const patientName = "John Doe";
+    const patientName = "Varun Jethani";
     const scanDate = "2025-03-25";
-    const hasPneumonia = true; // true or false based on the scan result
+    const hasPneumonia = mlOutput === "Normal"? false: true; // true or false based on the scan result
   const currentDate = new Date().toLocaleDateString();
 
   const headercolor = hasPneumonia ? "bg-red-600" : "bg-green-600";

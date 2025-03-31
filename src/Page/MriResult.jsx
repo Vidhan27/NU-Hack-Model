@@ -1,15 +1,16 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const MRIResultsPage = () => {
   // Sample patient data - in a real app, this would come from a database or API
+  const { state } = useLocation();
+  
+  const { mlOutput } = state || {};
   const patientData = {
-    name: "Jane Doe",
+    name: "Varun Jethani",
     id: "PT-10234567",
     dateOfScan: "2025-03-25",
-    tumorType: "LGG", // LGG or HGG
-    tumorLocation: "Left temporal lobe",
-    tumorSize: "2.3 cm",
-    radiologist: "Dr. Sarah Johnson",
+    tumorType: mlOutput.slice(0,3), // LGG or HGG
     recommendedFollowUp: "Neurosurgery consultation within 2 weeks",
   };
 
