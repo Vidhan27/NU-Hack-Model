@@ -18,20 +18,26 @@ MODEL_PATHS = {
     "tumor": os.path.join(MODEL_DIR, "tumor_classifier_model.tflite"),
 }
 
-# ✅ Load all TFLite models at startup
+# ✅ Lazy Loading Model Class
 class TFLiteModel:
     def __init__(self, model_path):
-        self.interpreter = tf.lite.Interpreter(model_path=model_path)
-        self.interpreter.allocate_tensors()
-        self.input_details = self.interpreter.get_input_details()
-        self.output_details = self.interpreter.get_output_details()
+        self.model_path = model_path
+        self.interpreter = None
+
+    def load_model(self):
+        if self.interpreter is None:
+            self.interpreter = tf.lite.Interpreter(model_path=self.model_path)
+            self.interpreter.allocate_tensors()
+            self.input_details = self.interpreter.get_input_details()
+            self.output_details = self.interpreter.get_output_details()
 
     def predict(self, input_data):
+        self.load_model()
         self.interpreter.set_tensor(self.input_details[0]['index'], input_data)
         self.interpreter.invoke()
         return self.interpreter.get_tensor(self.output_details[0]['index'])
 
-# Load models into memory
+# ✅ Initialize model placeholders
 pneumonia_model = TFLiteModel(MODEL_PATHS["pneumonia"])
 skin_cancer_model = TFLiteModel(MODEL_PATHS["skin_cancer"])
 tumor_model = TFLiteModel(MODEL_PATHS["tumor"])
