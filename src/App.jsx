@@ -13,9 +13,11 @@ axios.defaults.baseURL = "https://health-tracker-backend-jet.vercel.app/";
 // axios.defaults.baseURL = "http://localhost:4000/";
 axios.defaults.withCredentials = true;
 
+
+
 const App = () => {
   return (
-    <div className="min-h-screen w-full px-10 sm:px-20 flex">
+    <div className="min-h-screen w-full px-10 sm:px-20 flex *:flex-col items-center justify-center">
       <Navbar />
       <Outlet />
       <ChatBot />

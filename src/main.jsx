@@ -19,6 +19,9 @@ import Checklist from "./Page/Checklist.jsx"; // Import the Checklist page
 import MedicalRecords from "./Page/MedicalRecords.jsx"; // Import the MedicalRecords page
 import WaterIntakeDashboard from "./Page/WaterDashboard.jsx";
 import NotificationsPage from "./Page/NotificastionsPage.jsx";
+import MRIResultsPage from "./Page/MriResult.jsx";
+import LungScanResults from "./Page/LungScanResult.jsx";
+import SkinDiseaseResult from "./Page/SkinDisease.jsx";
 
 const router = createBrowserRouter([
   {
@@ -88,6 +91,19 @@ const router = createBrowserRouter([
             path: "/notification",
             element: <NotificationsPage />,
           },
+          {
+
+            path:"/mriresult",
+            element:<MRIResultsPage/>
+          },
+          {
+            path:"/lungresult",
+            element:<LungScanResults/>
+          },
+          {
+            path:"/skinresult",
+            element:<SkinDiseaseResult/>
+          }
         ],
       },
     ],

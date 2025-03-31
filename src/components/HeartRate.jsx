@@ -40,6 +40,8 @@ const HeartRate = () => {
           return dateTimeB - dateTimeA; // Sort in descending order
         });
 
+        console.log("Sorted Data:", sortedData); // Debugging line
+
         // Find the latest available date with pulse data
         const latestRecord = sortedData.find((record) => record.PulseRate > 0);
 
