@@ -7,15 +7,15 @@ import axios from "axios"; // Import axios
 const mlBackenLink = "http://127.0.0.1:5000";
 
 const medicalRecords = [
-  {
-    id: 1,
-    name: "Brain MRI scan",
-    description: "Upload your brain MRI scan.",
-    image:
-      "https://tse4.mm.bing.net/th?id=OIP.nAXhrxjevtGl73aQ_JewbQHaE8&pid=Api&P=0&h=180",
-    link: "/mriresult",
-    endpoint: "/predict_tumor"
-  },
+  // {
+  //   id: 1,
+  //   name: "Brain MRI scan",
+  //   description: "Upload your brain MRI scan.",
+  //   image:
+  //     "https://tse4.mm.bing.net/th?id=OIP.nAXhrxjevtGl73aQ_JewbQHaE8&pid=Api&P=0&h=180",
+  //   link: "/mriresult",
+  //   endpoint: "/predict_tumor"
+  // },
   {
     id: 2,
     name: "Chest CT scan",
